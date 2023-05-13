@@ -31,7 +31,6 @@ void move_UpDown(string text, int& x, int& y, int& dirY) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
     cout << text;
 
-    Sleep(50);
 }
 
 /*  move Left or Right */
@@ -49,7 +48,6 @@ void move_LeftRight(string text, int& x, int& y, int& dirX) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
     cout << text;
 
-    Sleep(50);
 }
 
 	/*  move Diagonally */
@@ -81,16 +79,16 @@ void move_Diagonally(string text, int& x, int& y, int& dirX, int& dirY) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
     cout << text;
 
-    Sleep(50);
 }
 
 int main(){
 
     string input ;
-    int x = 1, y = 1;
+    int delayTime;
+    
+    int x = 0, y = 0;
     int dirX = 1, dirY = 1;
- 	cout << "Enter Somthing : "<<endl;
- 	getline(cin , input);
+
 
     /* Adjust console size */
     
@@ -105,28 +103,44 @@ int main(){
     
     height = csbi.srWindow.Bottom - csbi.srWindow.Top ;
 
-
-	srand(time(0));
-    while(true) {
+	while(true) {
+		
+    	    cout << "Enter something : " ;
+        	getline(cin , input);
+        	if (input.length() > width/3) {
+            	cout << "Error: Input is too long. Please enter a shorter string." << endl;
+            	continue;
+        	}
+        	
+        	cout << "Enter delay time (in milliseconds): ";
+        	cin >> delayTime;
+        	
+		srand(time(0));
+    	while(true) {
 		int r = rand() % 3;
-    	while(!hit){
-	    	switch(r){
-	    		case 0:
-	    			move_UpDown(input, x, y, dirY);
-	    			break;
-	    		case 1:
-					move_Diagonally(input, x, y, dirX, dirY);
-					break;
-	    		case 2:
-	    			move_LeftRight(input, x, y, dirX);
-	    			break;	    	
+    		while(!hit){
+	    		switch(r){
+	    			case 0:
+	    				move_UpDown(input, x, y, dirY);
+	    				Sleep(delayTime);
+	    				break;
+	    			case 1:
+						move_Diagonally(input, x, y, dirX, dirY);
+						Sleep(delayTime);
+
+						break;
+	    			case 2:
+	    				move_LeftRight(input, x, y, dirX);
+	    				Sleep(delayTime);
+	    				break;	    	
+				}
+				system("cls");
 			}
-			system("cls");
-		}
-		if(hit){
+			if(hit){
 			hit = false;
-		}
+			}
 			
-    }
-    return 0;
+    	}
+    	return 0;
+	}
 }
