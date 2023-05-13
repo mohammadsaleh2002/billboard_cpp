@@ -116,31 +116,30 @@ int main(){
         	cin >> delayTime;
         	
 		srand(time(0));
-    	while(true) {
-		int r = rand() % 3;
-    		while(!hit){
-	    		switch(r){
-	    			case 0:
-	    				move_UpDown(input, x, y, dirY);
-	    				Sleep(delayTime);
-	    				break;
-	    			case 1:
+    		while(true) {
+			int r = rand() % 3;
+    			while(!hit){
+	    			switch(r){
+	    				case 0:
+	    					move_UpDown(input, x, y, dirY);
+	    					Sleep(delayTime);
+	    					break;
+	    				case 1:
 						move_Diagonally(input, x, y, dirX, dirY);
 						Sleep(delayTime);
-
 						break;
-	    			case 2:
-	    				move_LeftRight(input, x, y, dirX);
-	    				Sleep(delayTime);
-	    				break;	    	
+	    				case 2:
+		    				move_LeftRight(input, x, y, dirX);
+		    				Sleep(delayTime);
+	    					break;
+					}
+					system("cls");
 				}
-				system("cls");
-			}
-			if(hit){
-			hit = false;
-			}
+				if(hit){
+				hit = false;
+				}
 			
-    	}
-    	return 0;
+    		}
+    		return 0;
 	}
 }
